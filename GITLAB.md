@@ -1,21 +1,25 @@
-##### Boas práticas para o controle das atividades de desenvolvimento:
+### Indice
+
+[Boas práticas para o controle das atividades de desenvolvimento](#boas-praticas-para-o-controle-das-atividades-de-desenvolvimento)  
+[Branches Principais](#branches-principais)  
+[Comandos git](#comandos-git)  
+
+
+###### Boas práticas para o controle das atividades de desenvolvimento:
 Assuma a responsabilidade (Assignee) de uma atividade antes de iniciar seu desenvolvimento.  
-Ao sincronizar código-fonte de atividade não concluída, utilize o padrão related ia/projeto#numero_atividade, exemplo:  
-- `related ia/presos-api-bnmp#4 - informações do commit`  
+Ao sincronizar código-fonte de atividade não concluída, utilize o padrão related medeirosramos/projeto#numero_atividade, exemplo:  
+- `related medeirosramos/projeto#4 - informações do commit`  
 
 Ao sincronizar código-fonte relacionado a correção de bug no sistema, problema de desempenho, erros e/ou inconsistencias, utilize o padrão fixed ia/projeto#numero_atividade, exemplo:  
-- `fixed ia/presos-api-bnmp#4 - informações do commit`  
+- `fixed medeirosramos/projeto#4 - informações do commit`  
 
 Ao sincronizar código-fonte relacionado a novas rotinas, implementações e melhorias, utilize o padrão resolved ia/projeto#numero_atividade, exemplo:  
-- `resolved ia/presos-api-bnmp#4 - informações do commit`  
+- `resolved medeirosramos/projeto#4 - informações do commit`  
 
 Ao sincronizar código-fonte de atividade parcialmente atendida ou que não será mais implementada, utilize o padrão closed ia/projeto#numero_atividade, exemplo:  
-- `closed ia/presos-api-bnmp#4 - informações do commit`  
+- `closed medeirosramos/projeto#4 - informações do commit`  
 
-##### Organizando Etiquetas:
-https://gitlab.tjrn.jus.br/groups/ia/-/labels
-
-### Branches Principais
+###### Branches Principais
 
 - Branches semânticas - São branches no qual são desenvolvidos recursos novos para o projeto em questão. Essas branches tem por convenção nome começando com feat/ (exemplo: feat/extrair-dados-bnmp) e são criadas a partir da branch homolog (pois um recurso pode depender diretamente de outro recurso em algumas situações), e, ao final, são juntadas com a branch homolog;  
     - Build - alterações que afetam o sistema de build ou dependências externas  
@@ -34,7 +38,7 @@ https://gitlab.tjrn.jus.br/groups/ia/-/labels
 - Branch main/master - É a branch que contém código em nível de produção, ou seja, o código mais maduro existente na sua aplicação. Todo o código novo produzido eventualmente é juntado com a branch main/master, em algum momento do desenvolvimento.  
 
 
-#### Como testar o gitlab-ci.yaml localmente:
+###### Testar o gitlab-ci.yaml localmente:
 
 ```
 docker run -d --name gitlab-runner --restart always -v "${PWD}:/opt/presos-api-bnmp" -v /var/run/docker.sock:/var/run/docker.sock gitlab/gitlab-runner:latest
@@ -67,9 +71,55 @@ gitlab-runner exec shell build-job
 
 ```
 
-#### Informações Complementares:  
+###### Renomear Repositorio Git:  
+Renomear o projeto no GitLab (interface web)
+Acesse o GitLab.
 
-##### Branches:
+Vá até o repositório que deseja renomear.
+
+No menu lateral, clique em Settings > General.
+
+Expanda a seção "Advanced".
+
+Em Rename repository, altere o nome do projeto (o path, não apenas o name).
+
+Clique em Rename project.
+
+Isso mudará a URL do repositório remoto (por exemplo: https://gitlab.com/seu-usuario/novo-nome.git).
+
+✅ 2. Atualizar o repositório local (VSCode / Git)
+No terminal do VSCode ou da sua máquina, atualize a URL remota do Git:
+
+bash
+Copiar
+Editar
+git remote set-url origin https://gitlab.com/seu-usuario/novo-nome.git
+Você pode verificar se deu certo com:
+
+bash
+Copiar
+Editar
+git remote -v
+✅ 3. (Opcional) Renomear a pasta local do projeto
+Se quiser que a pasta do projeto no seu computador também tenha o novo nome:
+
+bash
+Copiar
+Editar
+cd ..
+mv nome-antigo novo-nome
+cd novo-nome
+code .
+✅ 4. Confirmar que está funcionando
+Você pode testar com:
+
+bash
+Copiar
+Editar
+git fetch
+git push
+
+###### Comandos git:
 
 Listar: `git branch`  
 Listar Remotas: `git branch -a`  
@@ -81,9 +131,9 @@ Excluindo: `git branch -d Feat/extrair-api-bnmp`
 
 Renomeando: `git branch -m Feat/extrair-dados-bnmp`  
 Renomeando: `git branch -m Feat/extrair-api-bnmp Feat/extrair-dados-bnmp`  
-
-##### Config:
-Exemplos de comandos:  
+  
+  
+Exemplos de comandos de configuração:  
 [gerando chave SSH](https://docs.gitlab.com/ee/user/ssh.html) atraves do ssh-keygen:  
 `ssh-keygen -t rsa -b 4096`  
 
@@ -101,5 +151,8 @@ verificando clonagem do repositório:
 `git status`  
 `git log -5`  
 `git status`  
+
+
+
 
 {% include rodape.md %}
