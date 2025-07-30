@@ -73,52 +73,32 @@ gitlab-runner exec shell build-job
 ```
 
 #### Renomear Repositorio Git:  
-Renomear o projeto no GitLab (interface web)
-Acesse o GitLab.
+Renomear o projeto: Settings > General > Advanced -> Rename Repository Project
+(por exemplo: https://gitlab.com/seu-usuario/novo-nome.git).
 
-Vá até o repositório que deseja renomear.
-
-No menu lateral, clique em Settings > General.
-
-Expanda a seção "Advanced".
-
-Em Rename repository, altere o nome do projeto (o path, não apenas o name).
-
-Clique em Rename project.
-
-Isso mudará a URL do repositório remoto (por exemplo: https://gitlab.com/seu-usuario/novo-nome.git).
-
-✅ 2. Atualizar o repositório local (VSCode / Git)
+Atualizar o repositório local (VSCode / Git)
 No terminal do VSCode ou da sua máquina, atualize a URL remota do Git:
+´´´bash
 
-bash
-Copiar
-Editar
 git remote set-url origin https://gitlab.com/seu-usuario/novo-nome.git
-Você pode verificar se deu certo com:
-
-bash
-Copiar
-Editar
 git remote -v
-✅ 3. (Opcional) Renomear a pasta local do projeto
-Se quiser que a pasta do projeto no seu computador também tenha o novo nome:
 
-bash
-Copiar
-Editar
+´´´
+
+(Opcional) Renomear a pasta local do projeto
+Se quiser que a pasta do projeto no seu computador também tenha o novo nome:
+´´´bash
 cd ..
 mv nome-antigo novo-nome
 cd novo-nome
 code .
-✅ 4. Confirmar que está funcionando
-Você pode testar com:
+´´´
 
-bash
-Copiar
-Editar
+4. Confirmar que está funcionando:
+´´´bash
 git fetch
 git push
+´´´
 
 #### Comandos git:
 
