@@ -13,9 +13,9 @@ Links Pessoais:
 [medeirosramos.github.io](https://medeirosramos.github.io/)  
 
 Markdown:
-[📡Documentação](https://gitlab.tjrn.jus.br/ia/gitlab-profile/-/blob/main/README.md)
-[📔Guia Rápido](https://ajuda.gitlab.io/guia-rapido/markdown/markdown/) 
-[📚Implementação GitLab](https://docs.gitlab.com/ee/user/markdown.html)
-[🐍Python](https://medeirosramos.github.io/medeirosramos/PYTHON.html)[📝](PYTHON.md) 
-[®️R](https://gitlab.tjrn.jus.br/ia/gitlab-profile/-/blob/main/R.md)
-[🐋Docker](https://medeirosramos.github.io/medeirosramos/DOCKER.html)[📝](DOCKER.md)
+&nbsp;&nbsp;&nbsp;&nbsp; [📡Documentação](https://gitlab.tjrn.jus.br/ia/gitlab-profile/-/blob/main/README.md) 
+&nbsp;&nbsp;&nbsp;&nbsp; [📔Guia Rápido](https://ajuda.gitlab.io/guia-rapido/markdown/markdown/) 
+&nbsp;&nbsp;&nbsp;&nbsp; [📚Implementação GitLab](https://docs.gitlab.com/ee/user/markdown.html) 
+&nbsp;&nbsp;&nbsp;&nbsp; [🐍Python](https://medeirosramos.github.io/medeirosramos/PYTHON.html)[📝](PYTHON.md) 
+&nbsp;&nbsp;&nbsp;&nbsp; [®️R](https://gitlab.tjrn.jus.br/ia/gitlab-profile/-/blob/main/R.md) 
+&nbsp;&nbsp;&nbsp;&nbsp; [🐋Docker](https://medeirosramos.github.io/medeirosramos/DOCKER.html)[📝](DOCKER.md)
