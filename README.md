@@ -1,24 +1,16 @@
-### Informação dos Meus Ambientes de Desenvolvimento.
+**medeirosramos/medeirosramos** é um repositório ✨ _especial_ ✨ porque o `README.md` (este arquivo) aparece no seu perfil do GitHub.
 
-[Guia Principal]()
+Aqui vão algumas informações sobre mim:
+
+- 🔭 Atualmente trabalho no **Tribunal de Justiça do Rio Grande do Norte (TJRN)** como Engenheiro de Dados, atuando em fluxos de dados e inteligência artificial.
+- 🌱 No momento, estou aprendendo mais sobre **Apache Airflow**, **OpenShift** e **arquitetura de plataformas de dados**.
+- 👯 Procuro colaborar em projetos de **dados abertos**, especialmente relacionados à **transparência pública** e ao **Poder Judiciário**.
+- 🤔 Busco ajuda para **otimizar pipelines CI/CD para fluxos de dados usando GitLab e Docker**.
+- 💬 Pergunte-me sobre **engenharia de dados**, **Python**, **pipelines ETL**, **inteligência artificial** ou **DevOps para dados**.
+- 📫 Como me encontrar: [LinkedIn](https://www.linkedin.com/in/medeirosramos) ou abrindo uma issue aqui no GitHub.
 
 
+Links Pessoais:
+[medeirosramos.github.io/medeirosramos](https://medeirosramos.github.io/medeirosramos)  
+[medeirosramos.github.io](https://medeirosramos.github.io/)  
 
-{% include rodape.md %}
-
-
-
-<!--
-**medeirosramos/medeirosramos** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on TJRN
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
