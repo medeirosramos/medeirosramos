@@ -1,6 +1,12 @@
 ### Informação dos Meus Ambientes de Desenvolvimento.
 
-Padrões Usados
+[Guia Principal]()
+
+
+
+{% include meu-bloco.md %}
+
+
 
 <!--
 **medeirosramos/medeirosramos** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
