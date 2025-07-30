@@ -8,9 +8,9 @@ Aqui vão algumas informações sobre mim:
 - 📫 Como me encontrar: [LinkedIn](https://www.linkedin.com/in/medeirosramos) ou abrindo uma issue aqui no GitHub.
 
 
-<!-- Links Pessoais:  
-[medeirosramos.github.io/medeirosramos](https://medeirosramos.github.io/medeirosramos)  
-[medeirosramos.github.io](https://medeirosramos.github.io/)   -->
+Links Pessoais: 
+[🌐 Página](https://medeirosramos.github.io/) 
+[👤 Perfil](https://medeirosramos.github.io/medeirosramos)  
 
 Markdown:
 <!-- &nbsp;[📡Documentação](https://gitlab.tjrn.jus.br/ia/gitlab-profile/-/blob/main/README.md) 
