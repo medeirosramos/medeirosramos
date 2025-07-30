@@ -78,30 +78,30 @@ Renomear o projeto: Settings > General > Advanced -> Rename Repository Project
 
 Atualizar o repositório local (VSCode / Git)
 No terminal do VSCode ou da sua máquina, atualize a URL remota do Git:
-´´´
-bash
+
+```bash
 
 git remote set-url origin https://gitlab.com/seu-usuario/novo-nome.git
 git remote -v
 
-´´´
+```
 
 (Opcional) Renomear a pasta local do projeto
 Se quiser que a pasta do projeto no seu computador também tenha o novo nome:
-´´´
+```
 bash
 cd ..
 mv nome-antigo novo-nome
 cd novo-nome
 code .
-´´´
+```
 
 4. Confirmar que está funcionando:
-´´´
+```
 bash
 git fetch
 git push
-´´´
+```
 
 #### Comandos git:
 
