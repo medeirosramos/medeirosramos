@@ -13,3 +13,6 @@ https://medium.com/akrostec/how-to-deploy-automated-isolated-airflow-test-enviro
 https://medium.com/@binitakhebang/integrating-gitlab-webhooks-into-a-project-to-automate-code-merge-ffaf2e40fe1c  
 
 https://programmaticponderings.com/2021/12/14/devops-for-dataops-building-a-ci-cd-pipeline-for-apache-airflow-dags/  
+
+
+{% include rodape.md %}

@@ -38,9 +38,4 @@ Projetos concluídos :
 Linguagens de Programação:
 - [Cartões de Referência para a linguagem R](https://rstudio.github.io/cheatsheets/)
 
-Markdown:
-[📡Documentação](https://gitlab.tjrn.jus.br/ia/gitlab-profile/-/blob/main/README.md)
-[📔Guia Rápido](https://ajuda.gitlab.io/guia-rapido/markdown/markdown/) 
-[📚Implementação GitLab](https://docs.gitlab.com/ee/user/markdown.html)
-[🐍 Python](https://gitlab.tjrn.jus.br/ia/gitlab-profile/-/blob/main/PYTHON.md)
-[®️ R](https://gitlab.tjrn.jus.br/ia/gitlab-profile/-/blob/main/R.md)
+{% include rodape.md %}

@@ -82,3 +82,6 @@ meu_pacote/
 ├── requirements.txt     # Dependências do pacote
 ├── README.md            # Documentação do pacote
 └── LICENSE              # Licença do pacote
+
+
+{% include rodape.md %}

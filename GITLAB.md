@@ -102,8 +102,4 @@ verificando clonagem do repositório:
 `git log -5`  
 `git status`  
 
-
-Markdown:
-[📡Documentação](https://gitlab.tjrn.jus.br/ia/gitlab-profile/-/blob/main/README.md)
-[📔Guia Rápido](https://ajuda.gitlab.io/guia-rapido/markdown/markdown/) 
-[📚Implementação GitLab](https://docs.gitlab.com/ee/user/markdown.html)
+{% include rodape.md %}

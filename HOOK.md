@@ -87,7 +87,4 @@ Agora o hook está configurado. Sempre que você tentar fazer um commit, o Git v
 
 
 
-Markdown:
-[📡Documentação](https://gitlab.tjrn.jus.br/ia/gitlab-profile/-/blob/main/README.md)
-[📔Guia Rápido](https://ajuda.gitlab.io/guia-rapido/markdown/markdown/) 
-[📚Implementação GitLab](https://docs.gitlab.com/ee/user/markdown.html)
+{% include rodape.md %}

@@ -24,3 +24,5 @@ Wildcard pattern: dev | homolog | main
 Disable SSL verification
 ```
 O mantenedor do OpenShift deve liberar a utilização do WebHook.
+
+{% include rodape.md %}
