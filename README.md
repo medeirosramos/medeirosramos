@@ -9,8 +9,8 @@ Aqui vão algumas informações sobre mim:
 
 
 Links Úteis: 
-[🌐Página](https://medeirosramos.github.io/)
-&nbsp;[👤Perfil](https://medeirosramos.github.io/medeirosramos)[📝](README.md)
+[🌐Página](https://medeirosramos.github.io/)[📝](https://github.com/medeirosramos/medeirosramos.github.io)
+&nbsp;[👤Perfil](https://medeirosramos.github.io/medeirosramos)[📝](https://github.com/medeirosramos/medeirosramos)
 &nbsp;[🐍Python](https://medeirosramos.github.io/medeirosramos/PYTHON.html)[📝](PYTHON.md)
 &nbsp;[🐋Docker](https://medeirosramos.github.io/medeirosramos/DOCKER.html)[📝](DOCKER.md)
 &nbsp;[🦊GitLab](https://medeirosramos.github.io/medeirosramos/GITLAB.html)[📝](GITLAB.md)
