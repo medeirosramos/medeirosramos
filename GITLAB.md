@@ -2,10 +2,11 @@
 
 [Boas práticas para o controle das atividades de desenvolvimento](#boas-praticas-para-o-controle-das-atividades-de-desenvolvimento)  
 [Branches Principais](#branches-principais)  
+[Renomear Repositorio Git](#renomear-repositorio-git)  
 [Comandos git](#comandos-git)  
 
 
-###### Boas práticas para o controle das atividades de desenvolvimento:
+#### Boas práticas para o controle das atividades de desenvolvimento:
 Assuma a responsabilidade (Assignee) de uma atividade antes de iniciar seu desenvolvimento.  
 Ao sincronizar código-fonte de atividade não concluída, utilize o padrão related medeirosramos/projeto#numero_atividade, exemplo:  
 - `related medeirosramos/projeto#4 - informações do commit`  
@@ -19,7 +20,7 @@ Ao sincronizar código-fonte relacionado a novas rotinas, implementações e mel
 Ao sincronizar código-fonte de atividade parcialmente atendida ou que não será mais implementada, utilize o padrão closed ia/projeto#numero_atividade, exemplo:  
 - `closed medeirosramos/projeto#4 - informações do commit`  
 
-###### Branches Principais
+#### Branches Principais
 
 - Branches semânticas - São branches no qual são desenvolvidos recursos novos para o projeto em questão. Essas branches tem por convenção nome começando com feat/ (exemplo: feat/extrair-dados-bnmp) e são criadas a partir da branch homolog (pois um recurso pode depender diretamente de outro recurso em algumas situações), e, ao final, são juntadas com a branch homolog;  
     - Build - alterações que afetam o sistema de build ou dependências externas  
@@ -38,7 +39,7 @@ Ao sincronizar código-fonte de atividade parcialmente atendida ou que não ser�
 - Branch main/master - É a branch que contém código em nível de produção, ou seja, o código mais maduro existente na sua aplicação. Todo o código novo produzido eventualmente é juntado com a branch main/master, em algum momento do desenvolvimento.  
 
 
-###### Testar o gitlab-ci.yaml localmente:
+#### Testar o gitlab-ci.yaml localmente:
 
 ```
 docker run -d --name gitlab-runner --restart always -v "${PWD}:/opt/presos-api-bnmp" -v /var/run/docker.sock:/var/run/docker.sock gitlab/gitlab-runner:latest
@@ -71,7 +72,7 @@ gitlab-runner exec shell build-job
 
 ```
 
-###### Renomear Repositorio Git:  
+#### Renomear Repositorio Git:  
 Renomear o projeto no GitLab (interface web)
 Acesse o GitLab.
 
@@ -119,7 +120,7 @@ Editar
 git fetch
 git push
 
-###### Comandos git:
+#### Comandos git:
 
 Listar: `git branch`  
 Listar Remotas: `git branch -a`  
