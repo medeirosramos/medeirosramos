@@ -1,2 +1,3 @@
 title: Meu Site
-theme: minima
+#theme: minima
+theme: jekyll-theme-hacker
