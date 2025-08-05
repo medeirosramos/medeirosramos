@@ -15,9 +15,10 @@ if "%~1"=="" (
 ) else (
     set "VERSAO_PYTHON=%~1"
 )
-set "VERSAO_PYTHON=%~1"
-set "VERSAO_PYTHON=%VERSAO_PYTHON:.=_%"
-echo %VERSAO_PYTHON%
+:: Define nome do ambiente conda
+echo [INFO] Versão do Python selecionada: %VERSAO_PYTHON%
+set "NOME_AMBIENTE=py_%VERSAO_PYTHON:.=_%"
+echo %NOME_AMBIENTE%
 
 echo ====================================
 echo [INFO] Criando arquivos de configuração
@@ -33,7 +34,7 @@ if not exist "ativar_ambiente.bat" (
         echo @echo off
         echo.
         echo echo "Executando Ativação do Conda"
-        echo call conda activate py312
+        echo call conda activate %NOME_AMBIENTE%
         echo.
         echo echo "Executando Ativação do ENV"
         echo call .\.venv\Scripts\activate
@@ -171,25 +172,25 @@ if errorlevel 1 (
 
 echo [INFO] Conda detectado.
 
-:: Verifica se o ambiente py312 já existe
-call conda env list | findstr /C:"py312" >nul
+:: Verifica se o ambiente %NOME_AMBIENTE% já existe
+call conda env list | findstr /C:%NOME_AMBIENTE% >nul
 if errorlevel 1 (
-    echo [INFO] Ambiente py312 não encontrado. Criando agora...
-    call conda create -y -n py312 python=%VERSAO_PYTHON%
+    echo [INFO] Ambiente %NOME_AMBIENTE% não encontrado. Criando agora...
+    call conda create -y -n %NOME_AMBIENTE% python=%VERSAO_PYTHON%
 ) else (
-    echo [INFO] Ambiente py312 já existe.
+    echo [INFO] Ambiente %NOME_AMBIENTE% já existe.
 )
 
 :: Desativa qualquer ambiente ativo
 call conda deactivate >nul 2>&1
 
 :: Ativa o ambiente conda
-echo [INFO] Ativando o ambiente py312...
-call conda activate py312
+echo [INFO] Ativando o ambiente %NOME_AMBIENTE%...
+call conda activate py3%NOME_AMBIENTE%12
 
 :: Cria venv dentro do ambiente conda (apenas se não existir)
 if not exist ".venv\" (
-    echo [INFO] Criando ambiente virtual .venv dentro do py312...
+    echo [INFO] Criando ambiente virtual .venv dentro do %NOME_AMBIENTE%...
     python -m venv .venv
     if errorlevel 1 (
         echo [ERRO] Falha ao criar o ambiente .venv.
