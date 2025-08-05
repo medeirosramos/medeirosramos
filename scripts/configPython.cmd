@@ -47,7 +47,6 @@ if not exist "Dockerfile" (
         echo FROM python:%VERSAO_PYTHON%
         echo LABEL maintainer="rodrigoramos@tjrn.jus.br"
         echo ENV DEBIAN_FRONTEND=noninteractive
-        echo "RUN apt-get update && apt-get install -y firefox-esr"
         echo ENV DISPLAY=:0
         echo ENV APP_HOME /opt/app
         echo RUN mkdir -p $APP_HOME
