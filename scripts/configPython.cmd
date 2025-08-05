@@ -2,7 +2,8 @@
 :: curl -o py.cmd https://medeirosramos.github.io/medeirosramos/scripts/configPython.cmd && py.cmd && del py.cmd
 
 @echo off
-setlocal EnableDelayedExpansion
+:: setlocal EnableDelayedExpansion
+setlocal
 set REQUIREMENTS=requirements.txt
 
 :: Define versão padrão do Python
@@ -48,17 +49,17 @@ if not exist "Dockerfile" (
         echo ENV DEBIAN_FRONTEND=noninteractive
         echo ^# RUN apt-get update && apt-get install -y firefox-esr 
         echo ENV DISPLAY=:0
-        echo ENV APP_HOME=!APP_HOME!
-        echo RUN mkdir -p !APP_HOME!
-        echo COPY . !APP_HOME!/
-        echo WORKDIR !APP_HOME!/
-        echo RUN pip install --no-cache-dir -r !APP_HOME!/requirements.txt
+        echo ENV APP_HOME /opt/app
+        echo RUN mkdir -p $APP_HOME
+        echo COPY . $APP_HOME/
+        echo WORKDIR $APP_HOME/
+        echo RUN pip install --no-cache-dir -r $APP_HOME/requirements.txt
         echo # ENV LANG C.UTF-8
         echo ENV LANG=C.UTF-8
         echo # ENV LC_ALL C.UTF-8
         echo ENV LC_ALL=C.UTF-8
         echo ENV PYTHONUNBUFFERED=1
-        echo CMD [ "python3", "!APP_HOME!/main.py" ]
+        echo CMD [ "python3", "$APP_HOME/main.py" ]
     ) > Dockerfile
     echo [INFO] Dockerfile criado com sucesso.
 ) else (
