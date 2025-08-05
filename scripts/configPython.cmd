@@ -2,7 +2,7 @@
 :: curl -o py.cmd https://medeirosramos.github.io/medeirosramos/scripts/configPython.cmd && py.cmd && del py.cmd
 
 @echo off
-setlocal
+setlocal EnableDelayedExpansion
 set REQUIREMENTS=requirements.txt
 
 :: Define versão padrão do Python
@@ -46,19 +46,19 @@ if not exist "Dockerfile" (
         echo FROM python:%VERSAO_PYTHON%
         echo LABEL maintainer="rodrigoramos@tjrn.jus.br"
         echo ENV DEBIAN_FRONTEND=noninteractive
-        echo # RUN apt-get update && apt-get install -y firefox-esr 
+        echo ^# RUN apt-get update && apt-get install -y firefox-esr 
         echo ENV DISPLAY=:0
-        echo ENV APP_HOME /opt/app
-        echo RUN mkdir -p $APP_HOME/        
-        echo COPY . $APP_HOME/
-        echo WORKDIR %APP_HOME%
-        echo RUN pip install --no-cache-dir -r $APP_HOME/requirements.txt
+        echo ENV APP_HOME=!APP_HOME!
+        echo RUN mkdir -p !APP_HOME!
+        echo COPY . !APP_HOME!/
+        echo WORKDIR !APP_HOME!/
+        echo RUN pip install --no-cache-dir -r !APP_HOME!/requirements.txt
         echo # ENV LANG C.UTF-8
         echo ENV LANG=C.UTF-8
         echo # ENV LC_ALL C.UTF-8
         echo ENV LC_ALL=C.UTF-8
         echo ENV PYTHONUNBUFFERED=1
-        echo CMD [ "python3", "$APP_HOME/main.py" ]
+        echo CMD [ "python3", "!APP_HOME!/main.py" ]
     ) > Dockerfile
     echo [INFO] Dockerfile criado com sucesso.
 ) else (
@@ -103,14 +103,14 @@ if not exist "%REQUIREMENTS%" (
     (
         echo # Dependências do projeto
         echo # Adicione suas dependências aqui, por exemplo:
-        echo pandas>=2.1.0
-        echo requests>=2.31.0
-        echo SQLAlchemy>=1.4.47
-        echo psycopg2-binary>=2.9.9  # usar psycopg2-binary evita a compilação local
-        echo openpyxl>=3.1.3
-        echo python-dotenv>=0.21.1
-        echo urllib3>=1.26.16
-        echo pytest>=7.4.4
+        echo "pandas>=2.1.0"
+        echo "requests>=2.31.0"
+        echo "SQLAlchemy>=1.4.47"
+        echo "psycopg2-binary>=2.9.9  # usar psycopg2-binary evita a compilação local"
+        echo "openpyxl>=3.1.3"
+        echo "python-dotenv>=0.21.1"
+        echo "urllib3>=1.26.16"
+        echo "pytest>=7.4.4"
         echo # Adicione outras dependências conforme necessário
     ) > %REQUIREMENTS%
     echo [INFO] Arquivo %REQUIREMENTS% criado com sucesso.
