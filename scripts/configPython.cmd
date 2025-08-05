@@ -97,6 +97,40 @@ if not exist ".dockerignore" (
 ) else (
     echo [INFO] Arquivo .dockerignore já existe. Nenhuma ação necessária.
 )
+
+:: Cria o arquivo .gitignore se não existir
+if not exist ".gitignore" (
+    echo [INFO] Criando arquivo .gitignore...
+    (
+        echo .venv/
+        echo __pycache__/
+        echo *.pyc
+        echo *.pyo
+        echo *.pyd
+        echo *.db
+        echo *.sqlite3
+        echo *.log
+        echo *.tar
+        echo *.gz
+        echo *.zip
+        echo *.egg-info
+        echo venv/
+        echo .env
+        echo .env.*
+        echo .pytest_cache/
+        echo .mypy_cache/
+        echo .coverage
+        echo .idea/
+        echo .vscode/
+        echo .DS_Store
+        echo .git/
+        ) > .gitignore
+    echo [INFO] Arquivo .gitignore criado com sucesso.
+) else (
+    echo [INFO] Arquivo .gitignore já existe. Nenhuma ação necessária.
+)  
+
+
 :: Cria arquivo requirements.txt se não existir
 if not exist "%REQUIREMENTS%" (
     echo [INFO] Criando arquivo %REQUIREMENTS%...
