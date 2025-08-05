@@ -145,6 +145,7 @@ if not exist "%REQUIREMENTS%" (
         echo "python-dotenv>=0.21.1"
         echo "urllib3>=1.26.16"
         echo "pytest>=7.4.4"
+        echo "setuptools>=65.5.1"
         echo # Adicione outras dependências conforme necessário
     ) > %REQUIREMENTS%
     echo [INFO] Arquivo %REQUIREMENTS% criado com sucesso.
