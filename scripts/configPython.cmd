@@ -15,6 +15,9 @@ if "%~1"=="" (
 ) else (
     set "VERSAO_PYTHON=%~1"
 )
+set "VERSAO_PYTHON=%~1"
+set "VERSAO_PYTHON=%VERSAO_PYTHON:.=_%"
+echo %VERSAO_PYTHON%
 
 echo ====================================
 echo [INFO] Criando arquivos de configuração
