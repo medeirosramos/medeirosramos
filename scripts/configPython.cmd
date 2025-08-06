@@ -134,6 +134,139 @@ if not exist ".gitignore" (
     echo [INFO] Arquivo .gitignore já existe. Nenhuma ação necessária.
 )  
 
+:: Cria o arquivo .gitignore se não existir
+if not exist ".flake8" (
+    echo [INFO] Criando arquivo .flake8...
+    (
+        echo "[flake8]"
+        echo "max-line-length = 120"
+        echo "ignore = E501, W503, F401, F821, F841, F811, F541"
+        echo "exclude = venv, migrations, __pycache__"
+        echo "select = F"
+        echo "; | Código | Significado resumido                                              |"
+        echo "; | ------ | ----------------------------------------------------------------- |"
+        echo "; | F401   | Imported but unused (importação não usada)                        |"
+        echo "; | F821   | Undefined name (nome usado não definido)                          |"
+        echo "; | F841   | Local variable assigned but never used (variável local não usada) |"
+        echo "; | F811   | Redefinition of unused name                                       |"
+        echo "; | F541   | f-string missing placeholders                                     |"
+        echo 
+        ) > .flake8
+    echo [INFO] Arquivo .flake8 criado com sucesso.
+) else (
+    echo [INFO] Arquivo .flake8 já existe. Nenhuma ação necessária.
+)  
+
+:: Cria o arquivo .gitlab-ci.yml se não existir
+if not exist ".gitlab-ci.yml" (
+    echo [INFO] Criando arquivo .gitlab-ci.yml...
+    (
+        echo stages: 
+        echo.  - lint
+        echo.  - test
+        echo.  - build
+        echo.  - scan
+        echo.  # - deploy
+        echo.
+        echo variables:
+        echo.  APP_NAME: presos-etl-siapen
+        echo.  IMAGE_NAME: presos/%%APP_NAME%%
+        echo.  PYTHON_VERSION: %VERSAO_PYTHON%
+        echo.  CI_REGISTRY: harbor-test.homologacao.tjrn.jus.br
+        echo.  CI_IMAGE: %%CI_REGISTRY%%/ia/%%IMAGE_NAME%%:%%IMAGE_TAG%%
+        echo.  IMAGE_TAG: %%CI_COMMIT_REF_SLUG%%
+        echo.  DOCKER_HOST: tcp://docker:2375
+        echo.  DOCKER_TLS_CERTDIR: ""  # Desativa TLS para facilitar a comunicação
+        echo.  DOCKER_DRIVER: overlay2
+        echo.
+        echo lint_code:
+        echo.  stage: lint
+        echo.  image: python:%%PYTHON_VERSION%%
+        echo.  script:
+        echo.    - pip install flake8
+        echo.    - flake8 .
+        echo.
+        echo run_tests:
+        echo.  stage: test
+        echo.  image: python:%%PYTHON_VERSION%%
+        echo.  before_script:
+        echo.    - python -m pip install --upgrade pip
+        echo.    - pip install -r requirements.txt ^|^| pip install .
+        echo.  script:
+        echo.    - set PYTHONPATH=. ^&^& pytest tests/ --junitxml=report.xml
+        echo.  artifacts:
+        echo.    reports:
+        echo.      junit: report.xml
+        echo.    expire_in: 1 week
+        echo.
+        echo build_image:
+        echo.  stage: build
+        echo.  image: docker:latest
+        echo.  services:
+        echo.    - name: docker:dind
+        echo.      alias: docker
+        echo.  before_script:
+        echo.    - docker system prune -af ^|^| true
+        echo.    - echo %%DOCKER_USER%%
+        echo.    - echo "%%DOCKER_PASSWORD%%" ^| docker login -u "%%DOCKER_USER%%" --password-stdin
+        echo.  script:
+        echo.    - docker info
+        echo.    - docker build --no-cache -t %%CI_IMAGE%% .
+        echo.    - docker save %%CI_IMAGE%% -o image.tar
+        echo.  artifacts:
+        echo.    paths:
+        echo.      - image.tar
+        echo.    expire_in: 1 hour
+        echo.
+        echo push_image_harbor:
+        echo.  stage: build
+        echo.  image: docker:latest
+        echo.  services:
+        echo.    - name: docker:dind
+        echo.      alias: docker
+        echo.  dependencies:
+        echo.    - build_image
+        echo.  before_script:
+        echo.    - echo %%HARBOR_USER%%
+        echo.    - echo "%%HARBOR_PASSWORD%%" ^| docker login -u "%%HARBOR_USER%%" --password-stdin %%CI_REGISTRY%%
+        echo.  script:
+        echo.    - docker load -i image.tar
+        echo.    - docker push %%CI_IMAGE%%
+    ) > .gitlab-ci.yml
+    echo [INFO] Arquivo .gitlab-ci.yml criado com sucesso.
+) else (
+    echo [INFO] Arquivo .gitlab-ci.yml já existe. Nenhuma ação necessária.
+)
+
+:: Verifica se a pasta tests existe, se não, cria
+if not exist "tests" (
+    echo [INFO] Criando diretório tests...
+    mkdir tests
+)
+
+:: Verifica se o arquivo tests/test_01.py existe, se não, cria com conteúdo padrão
+if not exist "tests\test_01.py" (
+    echo [INFO] Criando arquivo tests\test_01.py...
+    (
+        echo # tests/test_01.py
+        echo import sys
+        echo import os
+        echo sys.path.insert(0, os.path.abspath('.'))
+        echo. 
+        echo import unittest
+        echo # from presos_etl_siapen.api_Siapen import test_api_siapen
+        echo.
+        echo.
+        echo class TestModulo1(unittest.TestCase):
+        echo.    def test_padrao(self):
+        echo.        # self.assertEqual(test_api_dashboard(), "resultado esperado")
+        echo.        # assert test_api_siapen() == None
+        echo.        assert None == None
+    ) > tests\test_01.py
+    echo [INFO] Arquivo test_01.py criado com sucesso.
+) else (
+    echo [INFO] Arquivo test_01.py já existe. Nenhuma ação necessária.
+)
 
 :: Cria arquivo requirements.txt se não existir
 if not exist "%REQUIREMENTS%" (
