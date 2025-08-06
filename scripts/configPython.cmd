@@ -246,7 +246,7 @@ if not exist "tests" (
 
 :: Verifica se o arquivo tests/test_01.py existe, se não, cria com conteúdo padrão
 if not exist "tests\test_01.py" (
-    echo [INFO] Criando arquivo tests\test_01.py...
+    echo [INFO] Criando arquivo tests\test_01.py PADRAO NOVO...
 
     echo # tests/test_01.py > tests\test_01.py
     echo import sys >> tests\test_01.py
