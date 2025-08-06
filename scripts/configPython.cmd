@@ -251,7 +251,7 @@ if not exist "tests\test_01.py" (
         echo # tests/test_01.py
         echo import sys
         echo import os
-        echo sys.path.insert(0, os.path.abspath('.'))
+        echo sys.path.insert^(0, os.path.abspath^('.'^)^)
         echo. 
         echo import unittest
         echo # from presos_etl_siapen.api_Siapen import test_api_siapen
