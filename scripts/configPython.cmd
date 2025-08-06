@@ -186,7 +186,7 @@ call conda deactivate >nul 2>&1
 
 :: Ativa o ambiente conda
 echo [INFO] Ativando o ambiente %NOME_AMBIENTE%...
-call conda activate py3%NOME_AMBIENTE%12
+call conda activate %NOME_AMBIENTE%
 
 :: Cria venv dentro do ambiente conda (apenas se não existir)
 if not exist ".venv\" (
