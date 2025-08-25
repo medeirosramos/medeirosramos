@@ -161,6 +161,8 @@ if not exist ".flake8" (
 if not exist "tests" (
     echo [INFO] Criando diretório tests...
     mkdir tests
+) else (
+    echo [INFO] Diretório tests já existe. Nenhuma ação necessária.
 )
 
 :: Verifica se o arquivo tests/test_01.py existe, se não, cria com conteúdo padrão
