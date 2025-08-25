@@ -169,19 +169,19 @@ if not exist "tests" (
 if not exist "tests\test_01.py" (
     echo [INFO] Criando arquivo tests\test_01.py PADRAO NOVO...
 
-    echo # tests/test_01.py > tests\test_01.py
-    echo import sys >> tests\test_01.py
-    echo import os >> tests\test_01.py
-    echo sys.path.insert^(0, os.path.abspath^('.'^)^) >> tests\test_01.py
+    echo "# tests/test_01.py" > tests\test_01.py
+    echo "import sys" >> tests\test_01.py
+    echo "import os" >> tests\test_01.py
+    echo "sys.path.insert^(0, os.path.abspath^('.'^)^)" >> tests\test_01.py
     echo. >> tests\test_01.py
-    echo import unittest >> tests\test_01.py
-    echo # from presos_etl_siapen.api_Siapen import test_api_siapen >> tests\test_01.py
+    echo "import unittest" >> tests\test_01.py
+    echo "# from presos_etl_siapen.api_Siapen import test_api_siapen" >> tests\test_01.py
     echo. >> tests\test_01.py
-    echo class TestModulo1(unittest.TestCase): >> tests\test_01.py
-    echo     def test_padrao(self): >> tests\test_01.py
-    echo         # self.assertEqual(test_api_dashboard(), "resultado esperado") >> tests\test_01.py
-    echo         # assert test_api_siapen() == None >> tests\test_01.py
-    echo         assert None == None >> tests\test_01.py
+    echo "class TestModulo1(unittest.TestCase):" >> tests\test_01.py
+    echo "    def test_padrao(self):" >> tests\test_01.py
+    echo "        # self.assertEqual(test_api_dashboard(), 'resultado esperado')" >> tests\test_01.py
+    echo "        # assert test_api_siapen() == None" >> tests\test_01.py
+    echo "        assert None == None" >> tests\test_01.py
 
     echo [INFO] Arquivo test_01.py criado com sucesso.
 ) else (
