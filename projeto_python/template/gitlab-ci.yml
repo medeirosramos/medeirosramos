@@ -1,0 +1,137 @@
+# ---- funcoes reutilizáveis uteis --------
+.docker_login: &docker_login
+  - |
+    if [ -n "$DOCKER_USER" ] && [ -n "$DOCKER_PASSWORD" ]; then
+      echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
+    else
+      echo "⚠️  Sem $DOCKER_USER e $DOCKER_PASSWORD definidos no GitLab > Settings > CI/CD > Variables"
+    fi
+
+stages:
+  - lint
+  - test
+  - build
+  - scan
+  - deploy
+
+variables:
+  ####################################################################
+  ### VARIAVEIS PARA PREENCHIMENTO:
+  APP_NAME: nome-da-sua-aplicacao
+  IMAGE_NAME: llm/$APP_NAME
+  PYTHON_VERSION: 3.9.18 #3.12.9
+  # OPENSHIFT_WEBHOOK_URL: https://api.potiguar.intrajus.tjrn:6443/apis/build.openshift.io/v1/namespaces/ia/buildconfigs/presos-etl-siapen/webhooks/b315ab0648a8ad7c/gitlab
+  ####################################################################
+  CI_REGISTRY: harbor-test.homologacao.tjrn.jus.br  
+  IMAGE_TAG: $CI_COMMIT_REF_SLUG  
+  CI_IMAGE: $CI_REGISTRY/ia/$IMAGE_NAME:$IMAGE_TAG
+  CI_ARTIFACT_IMAGE: $APP_NAME.tar
+  OPENSHIFT_PROJECT: ia
+  OPENSHIFT_API: https://api.potiguar.intrajus.tjrn:6443  
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_TLS_CERTDIR: ""  # Desativa TLS para facilitar a comunicação
+  DOCKER_DRIVER: overlay2
+
+lint_code:
+  stage: lint
+  image: python:${PYTHON_VERSION}
+  script:
+    - pip install flake8
+    - flake8 .
+
+run_tests:
+  stage: test
+  image: python:${PYTHON_VERSION}
+  before_script:
+    - python -m pip install --upgrade pip
+    - pip install -r requirements.txt || pip install .
+  script:
+    - set PYTHONPATH=. && pytest tests/ --junitxml=report.xml
+  artifacts:
+    reports:
+      junit: report.xml
+    expire_in: 1 week
+
+build_image:
+  stage: build
+  image: docker:latest
+  services:
+    - name: docker:dind
+      alias: docker
+  before_script:
+    - docker system prune -af || true
+    - echo %DOCKER_USER%
+    - *docker_login   # <— reutiliza o snippet
+  script:
+    - docker info
+    - docker build --no-cache -t $CI_IMAGE .
+    - docker save $CI_IMAGE -o $CI_ARTIFACT_IMAGE
+  artifacts:
+    paths:
+      - $CI_ARTIFACT_IMAGE
+    expire_in: 1 hour
+
+push_image_harbor:
+  stage: build
+  image: docker:latest
+  services:
+    - name: docker:dind
+      alias: docker
+  dependencies:
+    - build_image
+  before_script:
+    # Login no Harbor
+    - echo $HARBOR_USER
+    - echo "$HARBOR_PASSWORD" | docker login -u "$HARBOR_USER" --password-stdin $CI_REGISTRY   
+  script:
+    # Comandos de publicação no Harbor
+    - docker load -i $CI_ARTIFACT_IMAGE
+    - docker push $CI_IMAGE
+
+# gitlab-runner exec shell scan_security
+scan_security:
+  stage: scan
+  image: docker:27
+  services:
+    - name: docker:27-dind
+      alias: docker
+  needs:
+    - job: push_image_harbor          # garante que a imagem já está no Harbor
+  variables:
+    DOCKER_SCOUT_VERSION: "1.18.2"
+    # Política de falha por severidade (mude para "critical" se preferir)
+    VULN_FAIL_LEVEL: "critical" # critical,high
+  before_script:
+    - apk add --no-cache curl tar jq
+    # Baixa/instala docker-scout
+    - |
+      curl -sSL \
+        "https://github.com/docker/scout-cli/releases/download/v${DOCKER_SCOUT_VERSION}/docker-scout_${DOCKER_SCOUT_VERSION}_linux_amd64.tar.gz" \
+        -o scout.tgz
+      tar -xzf scout.tgz
+      install -m 755 docker-scout /usr/local/bin/docker-scout
+      docker --version && docker-scout version
+    # Login no Harbor usando as MESMAS credenciais do push
+    - echo "$HARBOR_PASSWORD" | docker login -u "$HARBOR_USER" --password-stdin "$CI_REGISTRY"
+    # Puxa a imagem publicada no Harbor
+    - docker pull "$CI_IMAGE"
+    # Login no Docker Hub (necessário para 'docker-scout cves')
+    - *docker_login            # <— reutiliza o snippet
+
+  script:
+    # Relatório rápido (não falha o job)
+    - docker-scout quickview "$CI_IMAGE" || true
+    # 1) CVEs em JSON (formato GitLab) para artefato 
+    - docker-scout cves --format gitlab -o scout.cves.gitlab.json "$CI_IMAGE" || true 
+    # 2) SBOM em SPDX (JSON)
+    - docker-scout sbom --format spdx -o sbom.spdx.json "$CI_IMAGE" || true
+    # 3) Enforce por severidade (ignora CVEs do base image, opcional)
+    - docker-scout cves --only-severity $VULN_FAIL_LEVEL --ignore-base -e "$CI_IMAGE"   # falha (exit code 2) se houver CRITICAL
+  artifacts:
+    when: always
+    paths:
+      - scout.cves.gitlab.json
+      - sbom.spdx.json
+    expire_in: 1 week
+    reports:
+      sast: scout.cves.gitlab.json   # importa o relatório de vulnerabilidades (SAST) para o GitLab

@@ -1,0 +1,12 @@
+[flake8]
+max-line-length = 120
+ignore = E501, W503, F401, F821, F841, F811, F541
+exclude = venv, migrations, __pycache__
+select = F
+; | Código | Significado resumido                                              |
+; | ------ | ----------------------------------------------------------------- |
+; | F401   | Imported but unused (importação não usada)                        |
+; | F821   | Undefined name (nome usado não definido)                          |
+; | F841   | Local variable assigned but never used (variável local não usada) |
+; | F811   | Redefinition of unused name                                       |
+; | F541   | f-string missing placeholders                                     |
